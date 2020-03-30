@@ -1,10 +1,10 @@
 import React from 'react'
-import { Grid, Segment, Container } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 
-import Layout from './components/Layout'
-import Counter from './components/Counter'
-import Controls from './components/Control'
-import Display from './components/Display'
+import Layout from './Layout'
+import Counter from './Counter'
+import Controls from './Control'
+import Display from './Display'
 
 const App = () => {
   return (
@@ -13,10 +13,10 @@ const App = () => {
         <Grid columns='equal'>
           <Grid.Row>
             <Grid.Column>
-              <Counter />
+              <Counter type='break' />
             </Grid.Column>
             <Grid.Column>
-              <Counter />
+              <Counter type='session' />
             </Grid.Column>
           </Grid.Row>
         </Grid>

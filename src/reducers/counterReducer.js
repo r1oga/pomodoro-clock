@@ -1,11 +1,20 @@
-import { INCREASE, DECREASE } from '../actions/types'
+import {
+  INCREMENT_BREAK,
+  DECREMENT_BREAK,
+  INCREMENT_SESSION,
+  DECREMENT_SESSION
+} from '../actions/types'
 
-export default initialState => (state = initialState, action) => {
+export default (state, action) => {
   switch (action.type) {
-    case INCREASE:
-      return ++state
-    case DECREASE:
-      return --state
+    case INCREMENT_BREAK:
+      return { ...state, breakLength: ++state.breakLength }
+    case DECREMENT_BREAK:
+      return { ...state, breakLength: --state.breakLength }
+    case INCREMENT_SESSION:
+      return { ...state, sessionLength: ++state.sessionLength }
+    case DECREMENT_SESSION:
+      return { ...state, sessionLength: --state.sessionLength }
     default:
       return state
   }

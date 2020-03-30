@@ -2,25 +2,38 @@ import React, { useContext } from 'react'
 import { Button, Header } from 'semantic-ui-react'
 
 import { store } from '../store'
-import { INCREASE, DECREASE } from '../actions/types'
 
-export default () => {
+export default ({ type }) => {
   const { state, dispatch } = useContext(store)
   return (
     <>
-      <Header as='h2'>Counter</Header>
-      <div>{state}</div>
+      <Header
+        as='h2'
+        style={{ textAlign: 'center' }}
+        id={`${type}-label`}
+      >Counter
+      </Header>
+      <div
+        style={{ textAlign: 'center' }}
+        id={`${type}-length`}
+      >
+        {type === 'break' ? state.breakLength : state.sessionLength}
+      </div>
       <Button
-        content='Increase'
+        fluid
         icon='chevron up'
-        labelPosition='left'
-        onClick={() => dispatch({ type: INCREASE })}
+        size='big'
+        onClick={() => dispatch({ type: `INCREMENT_${type.toUpperCase()}` })}
+        style={{ margin: '1em 0 0 0' }}
+        id={`${type}-increment`}
       />
       <Button
-        content='Decrease'
+        fluid
         icon='chevron down'
-        labelPosition='left'
-        onClick={() => dispatch({ type: DECREASE })}
+        size='big'
+        onClick={() => dispatch({ type: `DECREMENT_${type.toUpperCase()}` })}
+        style={{ margin: '1em 0 0 0' }}
+        id={`${type}-decrement`}
       />
     </>
   )
