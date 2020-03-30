@@ -3,8 +3,7 @@ import { Grid, Segment } from 'semantic-ui-react'
 
 import Layout from './Layout'
 import Counter from './Counter'
-import Controls from './Control'
-import Display from './Display'
+import Timer from './Timer'
 
 const App = () => {
   return (
@@ -21,8 +20,9 @@ const App = () => {
           </Grid.Row>
         </Grid>
       </Segment>
-      <Display />
-      <Controls />
+      <Segment textAlign='center'>
+        <Timer />
+      </Segment>
     </Layout>
   )
 }
