@@ -3,7 +3,10 @@ import {
   DECREMENT_BREAK,
   INCREMENT_SESSION,
   DECREMENT_SESSION,
-  REDUCE
+  REDUCE,
+  STOP,
+  RESET,
+  SET_TIMER_ID
 } from '../actions/types'
 
 export default (state, action) => {
@@ -17,7 +20,13 @@ export default (state, action) => {
     case DECREMENT_SESSION:
       return { ...state, sessionLength: Math.max(--state.sessionLength, 1) }
     case REDUCE:
-      return { ...state, time: Math.max(0, --state.time) }
+      return { ...state, time: Math.max(0, --state.time), running: true }
+    case STOP:
+      return { ...state, running: false }
+    case RESET:
+      return { ...state, running: false, time: 3600 }
+    case SET_TIMER_ID:
+      return { ...state, timer: action.payload }
     default:
       return state
   }

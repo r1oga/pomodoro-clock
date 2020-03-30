@@ -6,7 +6,8 @@ const initialState = {
   sessionLength: 25,
   breakLength: 5,
   running: false,
-  time: 3600
+  time: 60,
+  timer: null
 }
 const store = createContext(initialState)
 const { Provider } = store
