@@ -12,12 +12,13 @@ export default () => {
       type: SET_TIMER_ID,
       payload: setInterval(() => {
         dispatch({ type: REDUCE })
-      }, 1000)
+      }, 10)
     })
   }
 
   const stop = () => {
     clearInterval(state.timer)
+    dispatch({ type: STOP })
   }
 
   const start_stop = () => {

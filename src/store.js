@@ -6,7 +6,7 @@ const initialState = {
   sessionLength: 25,
   breakLength: 5,
   running: false,
-  time: 60,
+  time: null,
   timer: null
 }
 const store = createContext(initialState)

@@ -6,7 +6,8 @@ import {
   REDUCE,
   STOP,
   RESET,
-  SET_TIMER_ID
+  SET_TIMER_ID,
+  SET_TIME
 } from '../actions/types'
 
 export default (state, action) => {
@@ -24,9 +25,11 @@ export default (state, action) => {
     case STOP:
       return { ...state, running: false }
     case RESET:
-      return { ...state, running: false, time: 3600 }
+      return { ...state, running: false, time: 3600, timer: null }
     case SET_TIMER_ID:
       return { ...state, timer: action.payload }
+    case SET_TIME:
+      return { ...state, time: action.payload }
     default:
       return state
   }
