@@ -8,6 +8,14 @@ import { SET_TIME } from '../actions/types'
 export default () => {
   const { state, dispatch } = useContext(store)
 
+  const playSound = () => {
+    const audio = document.getElementById('beep')
+
+    if (!audio) return
+    audio.currentTime = 0
+    audio.play()
+  }
+
   useEffect(() => {
     dispatch({ type: SET_TIME, payload: state.sessionLength * 60 })
   }, [state.sessionLength])
@@ -20,6 +28,10 @@ export default () => {
     if (seconds < 10) { seconds = '0' + seconds }
     return minutes + ':' + seconds
   }
+
+  useEffect(() => {
+    playSound()
+  }, [state.onBreak])
 
   return (
     <>
