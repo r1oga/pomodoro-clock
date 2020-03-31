@@ -21,11 +21,20 @@ export default (state, action) => {
     case DECREMENT_SESSION:
       return { ...state, sessionLength: Math.max(--state.sessionLength, 1) }
     case REDUCE:
-      return { ...state, time: Math.max(0, --state.time), running: true }
+    // if 0 reached, switch SESSION/BREAK
+      if (state.time === 0) {
+        if (!state.onBreak) {
+          return { ...state, time: state.breakLength * 60, onBreak: !state.onBreak }
+        } else {
+          return { ...state, time: state.sessionLength, onBreak: !state.onBreak }
+        }
+      } else {
+        return { ...state, time: --state.time, running: true }
+      }
     case STOP:
       return { ...state, running: false }
     case RESET:
-      return { ...state, running: false, time: 3600, timer: null }
+      return { ...state, running: false, time: state.sessionLength * 60, timer: null, breakLength: 5, sessionLength: 25 }
     case SET_TIMER_ID:
       return { ...state, timer: action.payload }
     case SET_TIME:

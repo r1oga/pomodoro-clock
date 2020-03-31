@@ -7,7 +7,8 @@ const initialState = {
   breakLength: 5,
   running: false,
   time: null,
-  timer: null
+  timer: null,
+  onBreak: false
 }
 const store = createContext(initialState)
 const { Provider } = store

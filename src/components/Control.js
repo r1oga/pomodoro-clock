@@ -29,6 +29,11 @@ export default () => {
     }
   }
 
+  const reset = () => {
+    clearInterval(state.timer)
+    dispatch({ type: RESET })
+  }
+
   return (
     <Container style={{ paddingTop: '1em' }}>
       <Button.Group icon>
@@ -36,7 +41,7 @@ export default () => {
           <Icon name='play circle outline' size='big' />
           <Icon name='pause circle outline' size='big' />
         </Button>
-        <Button icon='repeat' size='big' id='reset' />
+        <Button icon='repeat' size='big' id='reset' onClick={reset} />
       </Button.Group>
     </Container>
   )

@@ -23,8 +23,19 @@ export default () => {
 
   return (
     <>
-      <Header as='h2' id='timer-label' style={{ fontSize: '1.8em', paddingBottom: '0.5em' }}>TIMER</Header>
-      <span id='time-left' style={{ fontSize: '4em', color: 'tomato' }}>{state.time == null ? 'loading' : state.time.toMMSS()}</span>
+      <Header
+        as='h2'
+        id='timer-label'
+        style={{ fontSize: '1.8em', paddingBottom: '0.5em' }}
+      >
+        {state.onBreak ? 'BREAK' : 'SESSION'}
+      </Header>
+      <span
+        id='time-left'
+        style={{ fontSize: '4em', color: 'tomato' }}
+      >
+        {state.time == null ? 'loading' : state.time.toMMSS()}
+      </span>
       <Control />
     </>
   )
