@@ -10,6 +10,8 @@ import {
   SET_TIME
 } from '../actions/types'
 
+// FIXME: time-left is not formatted correctly: expected '59' to equal '60'
+
 export default (state, action) => {
   switch (action.type) {
     case INCREMENT_BREAK:
@@ -26,7 +28,7 @@ export default (state, action) => {
         if (!state.onBreak) {
           return { ...state, time: state.breakLength * 60, onBreak: !state.onBreak }
         } else {
-          return { ...state, time: state.sessionLength, onBreak: !state.onBreak }
+          return { ...state, time: state.sessionLength * 60, onBreak: !state.onBreak }
         }
       } else {
         return { ...state, time: --state.time, running: true }
@@ -34,7 +36,7 @@ export default (state, action) => {
     case STOP:
       return { ...state, running: false }
     case RESET:
-      return { ...state, running: false, time: state.sessionLength * 60, timer: null, breakLength: 5, sessionLength: 25 }
+      return { ...state, running: false, time: 25 * 60, timer: null, breakLength: 5, sessionLength: 25, onBreak: false }
     case SET_TIMER_ID:
       return { ...state, timer: action.payload }
     case SET_TIME:

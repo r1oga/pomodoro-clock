@@ -6,13 +6,16 @@ import { REDUCE, STOP, RESET, SET_TIMER_ID } from '../actions/types'
 
 export default () => {
   const { state, dispatch } = useContext(store)
+
+  const audio = document.getElementById('beep')
+
   const start = () => {
     // setInterval returns a timer ID
     dispatch({
       type: SET_TIMER_ID,
       payload: setInterval(() => {
         dispatch({ type: REDUCE })
-      }, 10)
+      }, 1000)
     })
   }
 
@@ -31,6 +34,8 @@ export default () => {
 
   const reset = () => {
     clearInterval(state.timer)
+    audio.pause()
+    audio.currentTime = 0
     dispatch({ type: RESET })
   }
 

@@ -8,13 +8,7 @@ import { SET_TIME } from '../actions/types'
 export default () => {
   const { state, dispatch } = useContext(store)
 
-  const playSound = () => {
-    const audio = document.getElementById('beep')
-
-    if (!audio) return
-    audio.currentTime = 0
-    audio.play()
-  }
+  const audio = document.getElementById('beep')
 
   useEffect(() => {
     dispatch({ type: SET_TIME, payload: state.sessionLength * 60 })
@@ -22,15 +16,17 @@ export default () => {
 
   Number.prototype.toMMSS = function () {
     let minutes = Math.floor(this / 60)
-    let seconds = this - (minutes * 60)
+    let seconds = this % 60
 
     if (minutes < 10) { minutes = '0' + minutes }
     if (seconds < 10) { seconds = '0' + seconds }
     return minutes + ':' + seconds
   }
 
+  // Play sound when switching between SESSIONs and BREAKs
   useEffect(() => {
-    playSound()
+    audio.play()
+    audio.currentTime = 0
   }, [state.onBreak])
 
   return (
@@ -46,7 +42,13 @@ export default () => {
         id='time-left'
         style={{ fontSize: '4em', color: 'tomato' }}
       >
-        {state.time == null ? 'loading' : state.time.toMMSS()}
+        {
+          (state.running === false && state.sessionLength == 60)
+            ? (state.sessionLength * 60).toMMSS()
+            : state.time == null
+              ? 'loading'
+              : state.time.toMMSS()
+        }
       </span>
       <Control />
     </>
